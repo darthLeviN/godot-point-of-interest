@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmy26ecs14kj0"]
+
+[ext_resource type="Script" path="res://bootloader/bootloader.gd" id="1_vfc2o"]
+
+[node name="Bootloader" type="Node"]
+script = ExtResource("1_vfc2o")

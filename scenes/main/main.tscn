@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddylpicii0lpt"]
+
+[ext_resource type="PackedScene" uid="uid://c7xkecu1pgg8h" path="res://assets/3d/humanoid/skeleton_model/skeleton_model.blend" id="1_vxdro"]
+[ext_resource type="Script" path="res://systems/ik/look_at_ik_3d.gd" id="2_25rnx"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3j7lo"]
+top_radius = 0.005
+bottom_radius = 0.005
+height = 20.0
+
+[node name="Main" type="Node"]
+
+[node name="skeleton_model" parent="." instance=ExtResource("1_vxdro")]
+
+[node name="GeneralSkeleton" parent="skeleton_model/Armature" index="0"]
+bones/1/rotation = Quaternion(-4.65661e-09, -7.1089e-15, -6.66134e-16, 1)
+bones/8/rotation = Quaternion(0.478894, 0.520251, 0.478894, -0.520251)
+bones/9/rotation = Quaternion(3.72529e-08, 0.770684, 0.637218, 1.78814e-07)
+bones/10/rotation = Quaternion(-0.0726763, 2.98023e-08, -1.49012e-08, 0.997356)
+bones/14/scale = Vector3(1.00003, 0.999999, 0.99997)
+bones/27/rotation = Quaternion(0.478894, -0.520251, -0.478894, -0.520251)
+bones/28/rotation = Quaternion(1.49012e-08, 0.770684, 0.637218, 1.49012e-07)
+bones/29/rotation = Quaternion(-0.0726763, 2.98023e-08, 4.47035e-08, 0.997356)
+bones/33/scale = Vector3(1.00003, 0.999999, 0.999971)
+
+[node name="LookAtIK3D" type="SkeletonModifier3D" parent="skeleton_model/Armature/GeneralSkeleton" index="9"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15308, 1.41554, -4.70911)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+active = true
+influence = 1.0
+script = ExtResource("2_25rnx")
+tail_bone = &"Head"
+root_bone = &"Hips"
+ik_weights = PackedVector3Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[node name="AnimationPlayer" parent="skeleton_model" index="1"]
+autoplay = "idle"
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="."]
+transform = Transform3D(0.973216, -0.0277025, 0.228217, 0.0202636, 0.999186, 0.0348749, -0.228997, -0.0293163, 0.972986, -0.00376113, 1.59311, 0.1773)
+bone_name = "Head"
+bone_idx = 5
+use_external_skeleton = true
+external_skeleton = NodePath("../skeleton_model/Armature/GeneralSkeleton")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BoneAttachment3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -10.2)
+mesh = SubResource("CylinderMesh_3j7lo")
+
+[editable path="skeleton_model"]
