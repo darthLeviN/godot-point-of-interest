@@ -9,3 +9,4 @@ As shown below, you should be able to limit the freedom of each bone in the IK c
 
 # Devlog :
 -1 https://youtu.be/BvKHSOjsnNw
+-2 https://www.youtube.com/watch?v=6Ihs0N-lgk0
