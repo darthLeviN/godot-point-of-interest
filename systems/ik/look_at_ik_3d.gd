@@ -70,21 +70,27 @@ func _process_modification() -> void:
 	weight_factor = Vector3(1.0, 1.0, 1.0)/(weight_factor + Vector3(0.001,0.001, 0.001))
 	
 	var convergence_requirement := Vector3()
-	var accum_quat := Quaternion.IDENTITY
+	var accum_basis := Basis().looking_at(front)
+	var target = transform.origin + offset
 	for idx in bone_indices.size():
 		var bone_idx := bone_indices[idx]
-		var bone_weight := ik_weights[idx]*weight_factor
+		var base_bone_weight := ik_weights[idx]
+		var bone_weight := base_bone_weight*weight_factor
 		convergence_requirement += bone_weight
 		var bone_transform := skeleton.get_bone_global_pose(bone_idx)
-		var direction = (transform.origin + offset - bone_transform.origin).normalized()
-		var rotationq = Quaternion(accum_quat*front, direction)
 		
-		var eulerq = rotationq.get_euler()*convergence_requirement
+		var direction := (target - bone_transform.origin).normalized()
+		var local_direction := accum_basis.inverse()*direction
+		var rotation_basis := Basis.looking_at(local_direction)
+		var rotationq := rotation_basis.get_rotation_quaternion()
+		#var rotationq = Quaternion(accum_quat*front, direction)
+		
+		var eulerq = rotationq.get_euler()*convergence_requirement#*base_bone_weight
 		rotationq = Quaternion.from_euler(eulerq)
 		var prev_trans = skeleton.get_bone_pose(bone_idx)
 		
-		accum_quat = (accum_quat*rotationq).normalized()
-		
+		#accum_quat = (accum_quat*rotationq).normalized()
+		accum_basis *= Basis(rotationq)
 		skeleton.set_bone_pose_rotation(bone_idx, rotationq)
 
 

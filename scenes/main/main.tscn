@@ -33,7 +33,7 @@ process_thread_group = 0
 physics_interpolation_mode = 0
 auto_translate_mode = 0
 editor_description = ""
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15308, 1.41554, -4.70911)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.478227, 0.766862, 0.720836)
 rotation_edit_mode = 0
 rotation_order = 2
 top_level = false
@@ -44,13 +44,13 @@ influence = 1.0
 script = ExtResource("2_25rnx")
 tail_bone = &"Head"
 root_bone = &"Hips"
-ik_weights = PackedVector3Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+ik_weights = PackedVector3Array(1, 0, 1, 1, 0.3, 1, 1, 1, 1, 1, 1, 1)
 
 [node name="AnimationPlayer" parent="skeleton_model" index="1"]
 autoplay = "idle"
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="."]
-transform = Transform3D(0.973216, -0.0277025, 0.228217, 0.0202636, 0.999186, 0.0348749, -0.228997, -0.0293163, 0.972986, -0.00376113, 1.59311, 0.1773)
+transform = Transform3D(-0.146921, -0.934548, 0.324089, -0.636448, 0.340128, 0.692276, -0.757197, -0.104556, -0.644763, -0.129089, 1.51288, 0.0257643)
 bone_name = "Head"
 bone_idx = 5
 use_external_skeleton = true
